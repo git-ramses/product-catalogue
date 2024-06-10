@@ -1,0 +1,14 @@
+.container
+  = link_to 'Back', root_path
+  | &nbsp;
+  = link_to 'Edit', edit_user_path(@user)
+  h1= "Show for User: #{@user.email}"
+
+  table.table.table-striped
+    thead
+      tr 
+        th Role
+    tbody
+      tr 
+        td= @user.role
+
