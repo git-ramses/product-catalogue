@@ -1,0 +1,17 @@
+.container
+  = link_to 'Back', user_path(@user.id)
+  h1= "Editing user: #{@user.email}"
+  = form_with model: @user, url: user_path, method: :patch, local: true do |f|
+    .form-group
+      = f.label 'Edit user registration'
+      | &nbsp;
+      = link_to 'Edit registration', edit_user_registration_path
+
+    .form-group
+      = f.label :role
+      | &nbsp;
+      = f.select :role, options_for_select(User.presentable_roles, @user.selected_role), { prompt: 'Select a role' }
+
+    .form-group
+      = f.submit 'Update'
+
