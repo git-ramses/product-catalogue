@@ -1,8 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_policy (0.6.9)
-      ruby-next-core (>= 1.0)
     actioncable (7.0.8.1)
       actionpack (= 7.0.8.1)
       activesupport (= 7.0.8.1)
@@ -80,6 +78,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
     builder (3.2.4)
+    cancancan (3.6.1)
     capybara (3.39.2)
       addressable
       matrix
@@ -223,7 +222,6 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
-    ruby-next-core (1.0.3)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -285,9 +283,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_policy
   bootsnap
   bootstrap
+  cancancan
   capybara
   debug
   devise

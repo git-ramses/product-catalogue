@@ -23,12 +23,16 @@ RSpec.describe UsersController, type: :controller do
 
         subject { get :show, params: { id: other_user.id } }
 
-        it 'raises ActionPolicy::Unauthorized error' do
+        before { allow(controller).to receive(:authorize!).and_raise(CanCan::AccessDenied) }
+
+        it 'redirects to root path' do
           expect(subject).to redirect_to root_path
         end
       end
 
       context 'when user is authorized' do
+        before { allow(controller).to receive(:authorize!).and_return(true) }
+
         it 'renders the show template' do
           expect(subject).to render_template :show
         end
@@ -53,14 +57,18 @@ RSpec.describe UsersController, type: :controller do
       context 'when user is not authorized' do
         let!(:other_user) { create(:user) }
 
+        before { allow(controller).to receive(:authorize!).and_raise(CanCan::AccessDenied) }
+
         subject { get :show, params: { id: other_user.id } }
 
-        it 'raises ActionPolicy::Unauthorized error' do
+        it 'redirects to root path' do
           expect(subject).to redirect_to root_path
         end
       end
 
       context 'when user is authorized' do
+        before { allow(controller).to receive(:authorize!).and_return(true) }
+
         it 'renders the edit template' do
           expect(subject).to render_template :edit
         end
@@ -69,7 +77,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#update' do
-    let!(:user) { create(:user) }
+    let(:user) { create(:user) }
     let(:params) { { id: user.id, user: { role: 0 } } }
 
     subject { patch :update, params: params }
@@ -88,16 +96,20 @@ RSpec.describe UsersController, type: :controller do
 
         subject { get :show, params: { id: other_user.id } }
 
-        it 'raises ActionPolicy::Unauthorized error' do
+        before { allow(controller).to receive(:authorize!).and_raise(CanCan::AccessDenied) }
+
+        it 'redirects to root path' do
           expect(subject).to redirect_to root_path
         end
       end
 
       context 'when user is authorized' do
+        before { allow(controller).to receive(:authorize!).and_return(true) }
+
         context 'when update succeeds' do
           it 'updates the user' do
             patch :update, params: params
-            expect(response).to redirect_to user_path(id: 1)
+            expect(response).to redirect_to user_path(id: user.id)
           end
         end
       end

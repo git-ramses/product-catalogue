@@ -6,15 +6,15 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def show
-    authorize! @user
+    authorize! :read, @user
   end
 
   def edit
-    authorize! @user
+    authorize! :update, @user
   end
 
   def update
-    authorize! @user
+    authorize! :update, @user
 
     role_id = user_params[:role].to_i
     update_params = { role: role_id }

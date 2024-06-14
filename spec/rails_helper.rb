@@ -6,8 +6,6 @@ require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
-# action policy
-require 'action_policy/rspec'
 # factory bot
 require_relative './support/factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!

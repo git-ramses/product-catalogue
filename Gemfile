@@ -33,7 +33,7 @@ gem 'jbuilder'
 gem 'devise'
 
 # user authorization
-gem 'action_policy'
+gem 'cancancan'
 
 # rails controller testing
 gem 'rails-controller-testing'
